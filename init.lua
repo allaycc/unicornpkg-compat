@@ -27,26 +27,15 @@ local PROVIDERS = {
   end,
 }
 
--- Categorize a destination path into one of allay's file kinds.
+-- Map a unicornpkg destination path into allay's `raw` kind, which installs
+-- at the literal absolute path. unicornpkg packages declare absolute paths
+-- (/lib/foo/init.lua, /bin/foo.lua, /etc/foo.cfg) and expect them preserved;
+-- routing through allay's `lib`/`bin`/etc. kinds would re-prefix the path
+-- (/usr/allay/lib/<pkg>/...) and break programs that hard-code /lib/-style
+-- requires. allay's setup.lua already includes /lib/?.lua and /lib/?/init.lua
+-- in package.path, so require() finds these.
 local function categorize(dest)
-  local function strip(prefix)
-    return (dest:gsub("^" .. prefix:gsub("([^%w])", "%%%1"), ""))
-  end
-
-  if dest:match("^/bin/") then
-    local name = strip("/bin/")
-    return "bin", (name:gsub("%.lua$", ""))
-  end
-  if dest:match("^/lib/")              then return "lib",     strip("/lib/")              end
-  if dest:match("^/usr/lib/")          then return "lib",     strip("/usr/lib/")          end
-  if dest:match("^/usr/libexec/")      then return "libexec", strip("/usr/libexec/")      end
-  if dest:match("^/usr/libLoadAPI/")   then return "loadapi", strip("/usr/libLoadAPI/")   end
-  if dest:match("^/usr/share/help/")   then return "help",    strip("/usr/share/help/")   end
-  if dest:match("^/etc/startup/")      then return "startup", strip("/etc/startup/")      end
-  if dest:match("^/startup/")          then return "startup", strip("/startup/")          end
-  if dest:match("^/etc/")              then return "etc",     strip("/etc/")              end
-
-  -- Compatibility kind: install at the literal absolute path.
+  if dest:sub(1, 1) ~= "/" then dest = "/" .. dest end
   return "raw", dest
 end
 
