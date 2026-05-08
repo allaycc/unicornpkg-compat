@@ -1,6 +1,6 @@
 # allay-unicornpkg-compat
 
-Translator that lets [allay](https://github.com/alfaoz/allay) read
+Translator that lets [allay](https://github.com/allaycc/allay) read
 unicornpkg-format packages.
 
 ## Install

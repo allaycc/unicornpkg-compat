@@ -5,7 +5,7 @@ return {
   author = "alfa",
   license = "MIT",
 
-  base_url = "https://raw.githubusercontent.com/alfaoz/allay-unicornpkg-compat/main",
+  base_url = "https://raw.githubusercontent.com/allaycc/unicornpkg-compat/main",
 
   files = {
     -- The translator file goes into a special 'translator' kind that allay
