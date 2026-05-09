@@ -1,11 +1,11 @@
-# allay-unicornpkg-compat
+# alicorn
 
 Translator that lets [allay](https://github.com/allaycc/allay) read
 unicornpkg-format packages.
 
 ## Install
 
-    allay install allay-unicornpkg-compat
+    allay install alicorn
 
 Reboot afterwards. Then add a unicornpkg-format source:
 

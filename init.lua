@@ -1,4 +1,4 @@
--- allay-unicornpkg-compat: translator for unicornpkg-format packages.
+-- alicorn: translator for unicornpkg-format packages.
 --
 -- Registers itself with allay's translator registry. After this package
 -- is installed, sources whose `index.lua` declares `format = "unicornpkg/v1.0.0"`
@@ -58,7 +58,7 @@ function M.translate(raw)
   if not pkgType then return nil, "package missing pkgType" end
   local builder = PROVIDERS[pkgType]
   if not builder then
-    return nil, "pkgType not supported by allay-unicornpkg-compat: " .. pkgType
+    return nil, "pkgType not supported by alicorn: " .. pkgType
   end
   result.base_url = builder(raw.instdat or {})
 
